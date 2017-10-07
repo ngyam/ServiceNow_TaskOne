@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>Validates that closed date is not before opened date.</description>
+        <field>active</field>
+        <global>true</global>
+        <messages/>
+        <name>DateChecker</name>
+        <order/>
+        <script><![CDATA[function onSubmit() {
+	
+	
+	var opened = g_form.getValue('opened_at');
+	var closed = g_form.getValue('closed_at');
+	
+	if(opened == undefined || opened == "" || closed == undefined || closed == "") {
+		//nothing to compare
+		return true;
+	}
+	
+	opened = new Date(opened);
+	closed = new Date(closed);
+	
+	g_form.clearMessages();
+	if(closed.getTime() < opened.getTime()) {
+		g_form.addErrorMessage("Closed date cannot be before Opened date. Please modify it and submit again.");
+		return false;
+	}
+	else {
+		return true;
+	}
+   
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-10-07 14:51:52</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>19dec4a3db6903008841d730cf961906</sys_id>
+        <sys_mod_count>21</sys_mod_count>
+        <sys_name>DateChecker</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TaskOne" source="x_165546_taskone">0a5e48efdb2903008841d730cf961953</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TaskOne">0a5e48efdb2903008841d730cf961953</sys_scope>
+        <sys_update_name>sys_script_client_19dec4a3db6903008841d730cf961906</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-10-07 16:10:12</sys_updated_on>
+        <table>incident</table>
+        <type>onSubmit</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
